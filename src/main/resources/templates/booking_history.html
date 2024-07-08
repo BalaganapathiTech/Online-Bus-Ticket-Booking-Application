@@ -1,0 +1,279 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.w3.org/1999/xhtml">-->
+
+<!--<head>-->
+<!--	<title>Booking History</title>-->
+<!--	<meta name="viewport" content="width=device-width, initial-scale=1.0" />-->
+
+<!--	<style>-->
+<!--		table,-->
+<!--		th,-->
+<!--		td {-->
+<!--			border: 1px solid black;-->
+<!--			border-collapse: collapse;-->
+<!--			width: 100%;-->
+<!--			text-align: center;-->
+<!--			table-layout: fixed;-->
+<!--		}-->
+
+<!--		button {-->
+<!--			padding: 5px;-->
+<!--			margin-right: 5px;-->
+<!--		}-->
+
+<!--		a {-->
+<!--			text-decoration: none;-->
+<!--			color: white;-->
+<!--		}-->
+<!--	</style>-->
+<!--	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>-->
+
+<!--</head>-->
+
+<!--<body style="background-color: lightgray">-->
+<!--	<br />-->
+
+<!--	<button style="background-color: blue; color: white" onclick="history.go(-1)">-->
+<!--		Go to Dashboard-->
+<!--	</button>-->
+
+<!--	<center>-->
+<!--		<h1>My Current Booking</h1>-->
+<!--		<div id="invoice">-->
+<!--			<table>-->
+<!--				<thead>-->
+<!--					<th>Booked Date</th>-->
+<!--					<th>Bus Id</th>-->
+<!--					<th>Bus Name</th>-->
+<!--					<th>Seats Qty</th>-->
+<!--					<th>Price</th>-->
+<!--					<th>Total Amount</th>-->
+
+<!--				</thead>-->
+<!--				<tbody th:if="${booked != null}">-->
+<!--					<tr>-->
+<!--						<td th:text="${booked.bookedTime}"></td>-->
+<!--						<td th:text="${booked.busId}"></td>-->
+<!--						<td th:text="${booked.busName}"></td>-->
+<!--						<td th:text="${booked.seatQty}"></td>-->
+<!--						<td th:text="${booked.price}"></td>-->
+<!--						<td th:text="${booked.amount}"></td>-->
+<!--					</tr>-->
+<!--				</tbody>-->
+<!--			</table>-->
+<!--		</div>-->
+
+<!--		<td>-->
+<!--			<button style="background-color: green" onclick="generatePDF()">-->
+<!--				E - Receipt Download-->
+<!--			</button>-->
+<!--		</td>-->
+<!--	</center>-->
+
+<!--	<br />-->
+
+<!--	<center>-->
+<!--		<h1>Booking History</h1>-->
+
+<!--		<table>-->
+<!--			<thead>-->
+<!--				&lt;!&ndash; Not needed -->
+<!--				<th>Bus ID</th>-->
+<!--				&ndash;&gt;-->
+<!--				<th>Booked Date</th>-->
+<!--				<th>Bus Id</th>-->
+<!--				<th>Bus Name</th>-->
+<!--				<th>Seats Qty</th>-->
+<!--				<th>Price</th>-->
+<!--				<th>Total Amount</th>-->
+<!--				<th>Action</th>-->
+<!--			</thead>-->
+<!--			<tbody th:if="${bookings != null}">-->
+<!--				<tr th:each="booking : ${bookings}">-->
+<!--					<td th:text="${booking.bookedTime}"></td>-->
+<!--					<td th:text="${booking.busId}"></td>-->
+<!--					<td th:text="${booking.busName}"></td>-->
+<!--					<td th:text="${booking.seatQty}"></td>-->
+<!--					<td th:text="${booking.price}"></td>-->
+<!--					<td th:text="${booking.amount}"></td>-->
+
+<!--					&lt;!&ndash; Add Pdf later &ndash;&gt;-->
+<!--					<td>-->
+<!--						<button style="background-color: green">-->
+<!--							<a>E - Receipt Download</a>-->
+<!--						</button>-->
+<!--					</td>-->
+<!--				</tr>-->
+<!--			</tbody>-->
+<!--		</table>-->
+<!--	</center>-->
+
+<!--	<script>-->
+<!--		function generatePDF() {-->
+<!--			const element = document.getElementById("invoice");-->
+
+<!--			// Default - html2pdf().from(element).save();-->
+
+<!--			var opt = {-->
+<!--				margin: 1,-->
+<!--				filename: 'e-receipt.pdf',-->
+<!--				image: {type: 'jpeg', quality: 0.98},-->
+<!--				html2canvas: {scale: 2},-->
+<!--				jsPDF: {unit: 'in', format: 'a4', orientation: 'landscape'}-->
+<!--			};-->
+<!--			-->
+<!--			html2pdf().set(opt).from(element).save();-->
+<!--		}-->
+<!--	</script>-->
+<!--</body>-->
+
+<!--</html>-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Booking History</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css">
+	<style>
+		body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+            padding-bottom: 50px; /* Space for bottom button */
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .bottom-button {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .bottom-button button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+	</style>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+
+<body>
+<div class="container">
+	<h1 class="text-center mb-4">My Current Booking</h1>
+	<div id="currentBooking">
+		<table class="table table-bordered">
+			<thead>
+			<tr>
+				<th>Booked Date</th>
+				<th>Bus ID</th>
+				<th>Bus Name</th>
+				<th>Seats Qty</th>
+				<th>Price</th>
+				<th>Total Amount</th>
+				<th>Action</th>
+			</tr>
+			</thead>
+			<tbody th:if="${booked != null}">
+			<tr>
+				<td th:text="${booked.bookedTime}"></td>
+				<td th:text="${booked.busId}"></td>
+				<td th:text="${booked.busName}"></td>
+				<td th:text="${booked.seatQty}"></td>
+				<td th:text="${booked.price}"></td>
+				<td th:text="${booked.amount}"></td>
+				<td>
+					<button class="btn btn-success" onclick="generatePDF('currentBooking')">
+						E - Receipt Download
+					</button>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<h1 class="text-center mb-4">Booking History</h1>
+	<div id="bookingHistory">
+		<table class="table table-bordered">
+			<thead>
+			<tr>
+				<th>Booked Date</th>
+				<th>Bus ID</th>
+				<th>Bus Name</th>
+				<th>Seats Qty</th>
+				<th>Price</th>
+				<th>Total Amount</th>
+				<th>Action</th>
+			</tr>
+			</thead>
+			<tbody th:if="${bookings != null}">
+			<tr th:each="booking : ${bookings}">
+				<td th:text="${booking.bookedTime}"></td>
+				<td th:text="${booking.busId}"></td>
+				<td th:text="${booking.busName}"></td>
+				<td th:text="${booking.seatQty}"></td>
+				<td th:text="${booking.price}"></td>
+				<td th:text="${booking.amount}"></td>
+				<td>
+					<button class="btn btn-success" onclick="generatePDF('bookingHistory')">
+						E - Receipt Download
+					</button>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<div class="bottom-button">
+	<button class="btn btn-primary" onclick="history.go(-1)">Home</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.min.js"></script>
+<script>
+	function generatePDF(id) {
+        const element = document.getElementById(id);
+
+        var opt = {
+            margin: 1,
+            filename: 'e-receipt.pdf',
+            image: {type: 'jpeg', quality: 0.98},
+            html2canvas: {scale: 2},
+            jsPDF: {unit: 'in', format: 'a4', orientation: 'landscape'}
+        };
+
+        html2pdf().set(opt).from(element).save();
+    }
+</script>
+</body>
+
+</html>

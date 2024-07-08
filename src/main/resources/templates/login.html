@@ -1,0 +1,208 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">-->
+<!--<head>-->
+<!--	<meta charset="UTF-8">-->
+<!--	<title>Login</title>-->
+<!--	<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
+<!--	<style>-->
+<!--		body {-->
+<!--            background: #f2f2f2;-->
+<!--            font-family: 'Arial', sans-serif;-->
+<!--        }-->
+<!--        .login-container {-->
+<!--            margin-top: 100px;-->
+<!--        }-->
+<!--        .card {-->
+<!--            border-radius: 10px;-->
+<!--        }-->
+<!--        .card-header {-->
+<!--            background-color: #ffc107;-->
+<!--            border-top-left-radius: 10px;-->
+<!--            border-top-right-radius: 10px;-->
+<!--        }-->
+<!--        .card-header h3 {-->
+<!--            color: white;-->
+<!--        }-->
+<!--        .input-group-text {-->
+<!--            background-color: #ffc107;-->
+<!--            border: none;-->
+<!--            color: white;-->
+<!--        }-->
+<!--        .btn-login {-->
+<!--            background-color: #ffc107;-->
+<!--            border: none;-->
+<!--        }-->
+<!--        .btn-login:hover {-->
+<!--            background-color: #e0a800;-->
+<!--        }-->
+<!--        .form-control {-->
+<!--            border-radius: 30px;-->
+<!--        }-->
+<!--	</style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="container login-container">-->
+<!--	<div class="row justify-content-center">-->
+<!--		<div class="col-md-6">-->
+<!--			<div class="card">-->
+<!--				<div class="card-header text-center">-->
+<!--					<h3>Login</h3>-->
+<!--				</div>-->
+<!--				<div class="card-body">-->
+<!--					<form th:action="@{/login}" method="post">-->
+<!--						<div class="form-group">-->
+<!--							<div class="input-group">-->
+<!--								<div class="input-group-prepend">-->
+<!--									<span class="input-group-text"><i class="fas fa-user"></i></span>-->
+<!--								</div>-->
+<!--								<input type="text" class="form-control" placeholder="Email" name="username" required>-->
+<!--							</div>-->
+<!--						</div>-->
+<!--						<div class="form-group">-->
+<!--							<div class="input-group">-->
+<!--								<div class="input-group-prepend">-->
+<!--									<span class="input-group-text"><i class="fas fa-lock"></i></span>-->
+<!--								</div>-->
+<!--								<input type="password" class="form-control" placeholder="Password" name="password" required>-->
+<!--							</div>-->
+<!--						</div>-->
+<!--						<div class="form-group text-center">-->
+<!--							<button type="submit" class="btn btn-login btn-block">Login</button>-->
+<!--						</div>-->
+<!--						<div class="form-group text-center">-->
+<!--							<a href="#" class="text-dark">Forgot Password?</a>-->
+<!--						</div>-->
+<!--						<div class="form-group text-center">-->
+<!--							<a href="http://localhost:8080/register" class="text-dark">Register Now</a>-->
+<!--						</div>-->
+<!--					</form>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--	</div>-->
+<!--</div>-->
+<!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>-->
+<!--<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>-->
+<!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>-->
+<!--<script src="https://kit.fontawesome.com/a076d05399.js"></script>-->
+<!--</body>-->
+<!--</html>-->
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<meta charset="UTF-8">
+	<title>Login</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<style>
+		body {
+            background: url('https://wallpaperaccess.com/full/1769997.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Arial', sans-serif;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+        }
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .welcome-container {
+            position: absolute;
+            top: 20px;
+            text-align: center;
+            width: 100%;
+            color: white;
+            font-size: 2em;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .card-header {
+            background-color: #8B4513; /* Warm brown color */
+            border-radius: 10px 10px 0 0;
+        }
+        .card-header h3 {
+            color: white;
+            text-align: center;
+        }
+        .input-group-text {
+            background-color: #8B4513;
+            border: none;
+            color: white;
+        }
+        .btn-login {
+            background-color: #8B4513;
+            border: none;
+            width: 100%;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .btn-login:hover {
+            background-color: #6B3511; /* Darker shade of brown */
+        }
+        .form-control {
+            border-radius: 5px;
+        }
+        .text-center {
+            margin-top: 10px;
+        }
+        .text-center a {
+            color: #000;
+        }
+	</style>
+</head>
+<body>
+<div class="welcome-container">
+	Welcome to Balaji Travels
+</div>
+<div class="login-container">
+	<div class="card">
+		<div class="card-header">
+			<h3>Login</h3>
+		</div>
+		<div class="card-body">
+			<form th:action="@{/login}" method="post">
+				<div class="form-group">
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-user"></i></span>
+						</div>
+						<input type="text" class="form-control" placeholder="Email" name="username" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-lock"></i></span>
+						</div>
+						<input type="password" class="form-control" placeholder="Password" name="password" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-login">Login</button>
+				</div>
+				<div class="form-group text-center">
+					<a href="#" class="text-dark">Forgot Password?</a>
+				</div>
+				<div class="form-group text-center">
+					<a href="http://localhost:8080/register" class="text-dark">Register Now</a>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</body>
+</html>

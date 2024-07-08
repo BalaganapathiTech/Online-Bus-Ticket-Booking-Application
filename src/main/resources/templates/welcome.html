@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+	<title>Passenger Portal</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+	<style>
+		body {
+            background: url('https://static.mothership.sg/1/2021/08/cover-bus.jpg') no-repeat center center fixed;
+            background-size: cover;
+            padding-top: 20px;
+            color: #fff;
+        }
+
+        .container {
+            margin-top: 20px;
+            background: #B8BCDD;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        .navbar {
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .btn-primary {
+            margin-top: 10px;
+            background-color: #1447FF;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #ff3d2e;
+        }
+
+        #header {
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #4A4A4A;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #4A4A4A;
+        }
+
+        h2,
+        .form-group label,
+        .form-group select,
+        .form-group input {
+            color: #4A4A4A !important;
+        }
+
+        .navbar-brand,
+        .nav-link {
+            color: #4A4A4A !important;
+        }
+
+        .btn-secondary {
+            margin: 5px;
+            background-color: #ff6f61;
+            border: none;
+        }
+
+        .btn-secondary:hover {
+            background-color: #ff3d2e;
+        }
+
+        .form-inline {
+            margin-top: 20px;
+        }
+
+        .btn-group {
+            margin-bottom: 20px;
+        }
+
+        .navbar-nav .nav-item .dropdown-menu {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .navbar-nav .nav-item .dropdown-item {
+            color: #4A4A4A !important;
+        }
+
+        .search-form {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .search-form label {
+            color: #fff;
+        }
+
+        .search-form .form-control {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: #fff;
+        }
+
+        .search-form .btn-primary {
+            background-color: #1447FF;
+            border: none;
+        }
+
+        .search-form .btn-primary:hover {
+            background-color: #3864FF;
+        }
+	</style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<a class="navbar-brand" href="#">Passenger Portal</a>
+	<h1 class="navbar-brand mb-0 h1">Balaji Travels</h1>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarNav">
+		<ul class="navbar-nav ml-auto">
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Menu
+				</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+					<a class="dropdown-item" th:href="@{/passenger/modifyprofile/{id}(id=${id})}">My Profile</a>
+					<a class="dropdown-item" th:href="@{/passenger/busschedules/{id}(id=${id})}">Bus Schedules</a>
+					<a class="dropdown-item" th:href="@{/passenger/booking/{id}(id=${id})}">My Bookings</a>
+				</div>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="http://localhost:8080/login">Logout</a>
+			</li>
+		</ul>
+	</div>
+</nav>
+
+<div class="container text-center">
+	<h1 id="header">Welcome to Passenger Portal</h1>
+	<h2>Browse and Book Bus Tickets</h2>
+	<form class="form-inline justify-content-center search-form" role="form" method="get" action="/passenger/busschedules">
+		<div class="form-group mr-3">
+			<label for="sDate" class="mr-2">Journey Date:</label>
+			<input id="sDate" type="date" name="sDate" class="form-control" required>
+		</div>
+		<div class="form-group mr-3">
+			<input name="passengerId" th:value="${id}" hidden>
+			<label for="fromLoc" class="mr-2">From Location:</label>
+			<select name="fromLoc" class="form-control">
+				<option th:each="f : ${from}" th:value="${f}" th:text="${f}" required></option>
+			</select>
+		</div>
+		<div class="form-group mr-3">
+			<label for="toLoc" class="mr-2">To Location:</label>
+			<select name="toLoc" class="form-control">
+				<option th:each="t : ${to}" th:value="${t}" th:text="${t}" required></option>
+			</select>
+		</div>
+		<button type="submit" class="btn btn-primary">Search</button>
+	</form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
