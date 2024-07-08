@@ -1,7 +1,5 @@
 	package com.Project.Bus_Booking_System.Configuration;
 
-	import static org.springframework.security.config.Customizer.withDefaults;
-
 	import java.util.ArrayList;
 	import java.util.List;
 
