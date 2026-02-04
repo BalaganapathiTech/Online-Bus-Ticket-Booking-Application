@@ -18,7 +18,7 @@ public class LoginController {
 
 	@GetMapping("/login")
 	public String login() {
-		return "login"; // This should match the name of your login HTML file (login.html)
+		return "login";
 	}
 	@GetMapping({ "/" })
 	public String loggedIn(@AuthenticationPrincipal User user, Model model) {
